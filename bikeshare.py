@@ -30,7 +30,7 @@ def get_filters():
         (str) day - name of the day of week to filter by leave empty to apply no day filter
     """
     print('Hello! Let\'s explore some US bikeshare data!')
-    # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+    # get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     
     city = None
     while city is None:
@@ -56,7 +56,7 @@ def get_filters():
         else:
             print('> I did not recognise the month name, please check spelling and try again...')
 
-    # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
+    # get user input for day of week (all, monday, tuesday, ... sunday)
     day = None
     while day is None:
         user_input = input('Enter first letters of day or type "all" to select all days: ').title()
@@ -137,12 +137,12 @@ def get_gender_distribution(df):
     for gender, count in gender_counts.items():
         yield (gender, count / n)
 
-def get_birth_decade_distribution(df):
+def get_birth_decade_distribution(df, granularity=10):
     """
     Get birth decade distribution
     """
     birth_years = df.dropna(subset=['Birth Year'])['Birth Year'].astype(int)
-    decade_counts = (10 * (birth_years // 10)).value_counts().sort_index()
+    decade_counts = (granularity * (birth_years // granularity)).value_counts().sort_index()
     n = len(birth_years)
     for decade, count in decade_counts.items():
         percentage = count/n
@@ -163,7 +163,7 @@ def station_stats(df):
     common_end_station = df['End Station'].mode()[0]
     print(f'Most common end station: "{common_end_station}"')
 
-    # TO DO: display most frequent combination of start station and end station trip
+    # display most frequent combination of start station and end station trip
     common_a, common_b = df.groupby(['Start Station', 'End Station']).size().idxmax()
     print(f'Most common journey: "{common_a}" -> "{common_b}"')
 
@@ -181,7 +181,7 @@ def trip_duration_stats(df):
     total_travel_days = round(df['Trip Duration'].sum() / (60*60*24), 1)
     print(f'Total time traveled: {total_travel_days} days')
 
-    # TO DO: display mean travel time
+    # display mean travel time
     mean_travel_mins = round(df['Trip Duration'].mean() / 60.0, 1)
     print(f'Average trip duration: {mean_travel_mins} minutes')
 
@@ -195,21 +195,18 @@ def user_stats(df):
     print('\nCalculating User Stats...\n')
     start_time = time.time()
 
-    # TO DO: Display counts of user types
+    # Display counts of user types
     if 'User Type' in df.columns:
         print('Count of user by type')
         for user_type, count in df.groupby('User Type').size().items():
             print(f'- {user_type}: {count}')
 
-    # TO DO: Display counts of gender
+    # Display counts of gender
     if 'Gender' in df.columns:
         print('Count of users by gender')
         for gender, percentage in get_gender_distribution(df):
             perc_str = f'{round(100*percentage, 2)}%'
             print(f'- {gender}: {perc_str}')
-        # for gender, count in df.groupby('Gender').size().items():
-        #     print(f'- {gender}: {count}')
-        # print(f"- ... Most users are {df['Gender'].mode()[0].lower()}")
 
     if 'Birth Year' in df.columns:
         print('Birth year distribution:')
