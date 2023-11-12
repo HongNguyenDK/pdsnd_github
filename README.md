@@ -1,17 +1,20 @@
->**Note**: Please **fork** the current Udacity repository so that you will have a **remote** repository in **your** Github account. Clone the remote repository to your local machine. Later, as a part of the project "Post your Work on Github", you will push your proposed changes to the remote repository in your Github account.
+# Bike Sharing
+
+> Python program to view statistics for bike sharing.
 
 ### Date created
-Include the date you created this project and README file.
 
-### Project Title
-Replace the Project Title
+Repo created on 12 Nov 2023
 
 ### Description
-Describe what your project is about and what it does
+
+See statistics for bike sharing data
 
 ### Files used
-Include the files used
+
+To use the project you need to download csv files for bike data.
 
 ### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
+
+The idea for this repository came from the Udacity course "Programming for Data Science in Python".
 
