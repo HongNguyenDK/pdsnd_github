@@ -128,6 +128,9 @@ def time_stats(df):
     print('-'*40)
 
 def get_gender_distribution(df):
+    """
+    Get gender distributions
+    """
     genders = df['Gender'].fillna('Unknown')
     gender_counts = genders.value_counts().sort_index()
     n = len(genders)
@@ -135,6 +138,9 @@ def get_gender_distribution(df):
         yield (gender, count / n)
 
 def get_birth_decade_distribution(df):
+    """
+    Get birth decade distribution
+    """
     birth_years = df.dropna(subset=['Birth Year'])['Birth Year'].astype(int)
     decade_counts = (10 * (birth_years // 10)).value_counts().sort_index()
     n = len(birth_years)
