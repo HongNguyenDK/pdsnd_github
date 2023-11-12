@@ -134,9 +134,9 @@ def get_gender_distribution(df):
     for gender, count in gender_counts.items():
         yield (gender, count / n)
 
-def get_birth_decade_distribution(df):
+def get_birth_decade_distribution(df, granularity=10):
     birth_years = df.dropna(subset=['Birth Year'])['Birth Year'].astype(int)
-    decade_counts = (10 * (birth_years // 10)).value_counts().sort_index()
+    decade_counts = (granularity * (birth_years // granularity)).value_counts().sort_index()
     n = len(birth_years)
     for decade, count in decade_counts.items():
         percentage = count/n
